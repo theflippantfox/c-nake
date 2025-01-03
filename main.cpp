@@ -96,15 +96,18 @@ void printSnake() {
   }
 }
 
-// The core game funtion
-void runGame() {
+// Preps the game
+void initGame() {
   std::srand(std::time(0)); // Seed random number generator for food generation
 
   snake.head = {boardWidth / 2, boardHeight / 2};
 
   printBoard();
   createFoodItem();
+}
 
+// The core game funtion
+void runGame() {
   while (!isGameOver) {
     printSnake();
     gotoCords(food.x, food.y);
@@ -119,6 +122,7 @@ int main() {
   // Hide the cursor
   std::cout << "\u001b[?25l";
 
+  initGame();
   runGame();
 
   // Show the cursor
