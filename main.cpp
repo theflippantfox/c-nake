@@ -1,5 +1,10 @@
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <vector>
+
+int boardHeight = 1;
+int boardWidth = 1;
 
 struct Cords {
   int x, y;
@@ -22,6 +27,14 @@ void growSnake(int x, int y) {
   bodyitem.x = x;
   bodyitem.y = y;
   snake.body.push_back(bodyitem);
+}
+
+// Creates a food item at a random location
+void createFoodItem() {
+  std::srand(std::time(0));           // Seed random number generator
+  food.x = std::rand() % boardHeight; // Replace 20 with board width
+  food.y = std::rand() % boardWidth;  // Replace 10 with board height
+  isFood = 1;
 }
 
 // Checks if the snake has eaten the food
@@ -58,6 +71,7 @@ void printSnake() {
 
 // The core game funtion
 void runGame() {
+
   // TODO: Implement game loop
   growSnake(2, 3);
   growSnake(3, 3);
