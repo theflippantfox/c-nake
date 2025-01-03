@@ -42,7 +42,8 @@ void checkGameOver() {
     isGameOver = 1;
   }
 
-  for (int i = 0; i < snake.body.size(); i++) {
+  for (std::vector<Cords>::size_type i = 0; i < snake.body.size(); i++) {
+    // for (int i = 0; i < snake.body.size(); i++) {
     if (snake.head.x == snake.body[i].x && snake.head.y == snake.body[i].y) {
       isGameOver = 1;
     }

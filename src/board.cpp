@@ -31,7 +31,7 @@ void printSnake() {
   gotoCords(snake.head.x, snake.head.y);
   std::cout << "@";
 
-  for (int i = 0; i < snake.body.size(); i++) {
+  for (std::vector<Cords>::size_type i = 0; i < snake.body.size(); i++) {
     gotoCords(snake.body[i].x, snake.body[i].y);
     std::cout << "*";
   }

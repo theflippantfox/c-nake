@@ -4,7 +4,7 @@ CXXFLAGS = -std=c++11 -Wall -Wextra -g
 LDFLAGS = -lncurses
 
 # Paths
-SRCS = src/*.cpp
+SRCS = src/main.cpp src/board.cpp src/game.cpp src/input.cpp src/curses.cpp # Explicitly list the source files
 OBJS = $(SRCS:src/%.cpp=bin/%.o)
 
 # Executable name
@@ -19,6 +19,7 @@ $(EXEC): $(OBJS)
 
 # Create object files
 bin/%.o: src/%.cpp
+	@mkdir -p bin
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean up build files

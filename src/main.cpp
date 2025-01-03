@@ -6,8 +6,11 @@
 #include <ncurses.h>
 #include <thread>
 
+extern void setupCurses();
+extern void cleanupCurses();
+
 int main() {
-  // Hide the cursor
+  // Hide the cursor on the terminal
   std::cout << "\u001b[?25l";
 
   setupCurses();
@@ -17,7 +20,7 @@ int main() {
 
   cleanupCurses();
 
-  // Show the cursor
+  // Show the cursor again
   std::cout << "\u001b[?25h";
   return 0;
 }
