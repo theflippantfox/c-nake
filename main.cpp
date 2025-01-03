@@ -1,6 +1,8 @@
+#include <chrono>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <thread>
 #include <vector>
 
 struct Cords {
@@ -12,8 +14,8 @@ struct Snake {
   std::vector<Cords> body;
 } snake;
 
-int boardHeight = 32;
-int boardWidth = 64;
+int boardHeight = 20;
+int boardWidth = 40;
 
 Cords food;
 bool isFood = 0;
@@ -35,8 +37,8 @@ void growSnake(int x, int y) {
 
 // Creates a food item at a random location
 void createFoodItem() {
-  food.x = std::rand() % boardHeight; // Replace 20 with board width
-  food.y = std::rand() % boardWidth;  // Replace 10 with board height
+  food.x = std::rand() % boardWidth;
+  food.y = std::rand() % boardHeight;
   isFood = 1;
 }
 
@@ -84,7 +86,6 @@ void printSnake() {
 
   // If snake does not have any body then return
   if (!snake.body.size()) {
-    std::cout << "No Body :(";
     return;
   }
 
@@ -99,15 +100,28 @@ void printSnake() {
 void runGame() {
   std::srand(std::time(0)); // Seed random number generator for food generation
 
-  // TODO: Implement game loop
+  snake.head = {boardWidth / 2, boardHeight / 2};
+
+  printBoard();
+  createFoodItem();
 
   while (!isGameOver) {
+    printSnake();
+    gotoCords(food.x, food.y);
+    std::cout << "+";
 
-    printBoard();
+    // Sleep for 200 milliseconds
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
   }
 }
 
 int main() {
+  // Hide the cursor
+  std::cout << "\u001b[?25l";
+
   runGame();
+
+  // Show the cursor
+  std::cout << "\u001b[?25h";
   return 0;
 }
