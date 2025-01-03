@@ -13,8 +13,10 @@ struct Snake {
 Cords food;
 bool isFood = 0;
 
+// Goto the provided cordinates on the terminal
 void gotoCords(int x, int y) {}
 
+// Add length to snake body based on certain events
 void growSnake(int x, int y) {
   Cords bodyitem;
   bodyitem.x = x;
@@ -22,6 +24,7 @@ void growSnake(int x, int y) {
   snake.body.push_back(bodyitem);
 }
 
+// Checks if the snake has eaten the food
 void eatFood() {
   if (!isFood) {
     return;
@@ -32,8 +35,10 @@ void eatFood() {
   }
 }
 
+// Print the board (level)
 void printBoard() {}
 
+// Print the snake head and body
 void printSnake() {
   gotoCords(snake.head.x, snake.head.y); // Goto the cordinates of snake head
   std::cout << "@";                      // Print @ for head
@@ -51,7 +56,9 @@ void printSnake() {
   }
 }
 
+// The core game funtion
 void runGame() {
+  // TODO: Implement game loop
   growSnake(2, 3);
   growSnake(3, 3);
   growSnake(4, 3);
