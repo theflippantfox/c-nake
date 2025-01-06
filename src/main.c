@@ -1,5 +1,5 @@
-#include "../engine/engine.h"
-#include "game.h"
+#include "engine/engine.h"
+#include "game/game.h"
 
 int main() {
   Game snake_game = {.init = snake_init,

@@ -4,7 +4,7 @@ CXXFLAGS = -std=c++11 -Wall -Wextra -g
 LDFLAGS = -lncurses
 
 # Paths
-SRCS = src/*/*.c
+SRCS = src/*/*.c src/main.c
 OBJS = $(SRCS:src/%.cpp=bin/%.o)
 
 # Executable name
