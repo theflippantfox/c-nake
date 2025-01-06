@@ -14,6 +14,13 @@ struct _Snake {
   _Cords body[];
 } Snake;
 
+struct _Direction {
+  int x;
+  int y;
+} Direction;
+
+_Cords Food;
+
 void print_border() {
   for (int i = 0; i <= window_height; i++) {
     for (int j = 0; j <= window_width; j++) {
@@ -43,12 +50,13 @@ void print_border() {
 void snake_init() {
   Snake.head.x = 10;
   Snake.head.y = 10;
+
+  Direction.x = 1;
 }
 
 void snake_update() {
-  Snake.head.x++;
-  if (Snake.head.x > window_width)
-    Snake.head.x = 0;
+  Snake.head.x += Direction.x;
+  Snake.head.y += Direction.y;
 }
 
 void snake_render() {
