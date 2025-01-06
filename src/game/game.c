@@ -10,12 +10,21 @@ _Snake Snake;
 _Cords Direction;
 _Cords Food;
 
+void init_colors() {
+  if (has_colors()) {
+    start_color();
+
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+  }
+}
+
 void food_init() {
   Food.x = rand() % (window_width - 2) + 1;
   Food.y = rand() % (window_height - 2) + 1;
 }
 
 void print_border() {
+  attron(COLOR_PAIR(1));
   for (int i = 0; i <= window_height; i++) {
     for (int j = 0; j <= window_width; j++) {
       if ((i == 0 || i == window_height) && (j == 0 || j == window_width)) {
@@ -34,6 +43,7 @@ void print_border() {
       }
     }
   }
+  attroff(COLOR_PAIR(1));
 }
 
 void food_render() { mvprintw(Food.y, Food.x, "x"); }
@@ -60,11 +70,29 @@ void clear_board() {
   }
 }
 
+void handle_input(int ch) {
+  switch (ch) {
+  case KEY_UP:
+    if (Direction.y != 1) {
+      Direction.x = 0;
+      Direction.y = -1;
+    }
+    break;
+
+  case 'q':
+    game_over = 1;
+    break;
+  }
+}
+
 void snake_render() {
   clear_board();
   food_render();
 
   mvprintw(Snake.head.y, Snake.head.x, "O");
+  for (int i = 0; i < Snake.body.length; i++) {
+    mvprintw(Snake.body[i].y, Snake.body[i].x, "x");
+  }
 }
 
 void snake_init() {

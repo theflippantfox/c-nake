@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 struct _Cords {
   int x;
@@ -18,6 +19,9 @@ struct _Direction {
   int x;
   int y;
 };
+
+extern int window_width;
+extern int window_height;
 
 void snake_init();
 void snake_update();
