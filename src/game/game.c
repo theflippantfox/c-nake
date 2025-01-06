@@ -1,25 +1,14 @@
 #include "game.h"
 #include "../engine/engine.h"
 
-int window_width = 120;
-int window_height = 35;
+void food_init() {
+  srand(time(NULL));
 
-struct _Cords {
-  int x;
-  int y;
-};
+  Food.x = rand() % (window_width - 2) + 1;
+  Food.y = rand() % (window_height - 2) + 1;
+}
 
-struct _Snake {
-  _Cords head;
-  _Cords body[];
-} Snake;
-
-struct _Direction {
-  int x;
-  int y;
-} Direction;
-
-_Cords Food;
+void food_render() { mvprintw(Food.y, Food.x, "x"); }
 
 void print_border() {
   for (int i = 0; i <= window_height; i++) {
@@ -29,8 +18,8 @@ void print_border() {
         continue;
       }
 
-      if (i == 0) {
-        mvprintw(i, j, "-");
+      if (i == 0 || i == window_height) {
+        mvprintw(i, j, "=");
         continue;
       }
 
@@ -38,16 +27,12 @@ void print_border() {
         mvprintw(i, j, "|");
         continue;
       }
-
-      if (i == window_height) {
-        mvprintw(i, j, "-");
-        continue;
-      }
     }
   }
 }
 
 void snake_init() {
+
   Snake.head.x = 10;
   Snake.head.y = 10;
 
@@ -61,6 +46,7 @@ void snake_update() {
 
 void snake_render() {
   print_border();
+  food_render();
 
   mvprintw(Snake.head.y, Snake.head.x, "O");
 }
