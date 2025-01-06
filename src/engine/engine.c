@@ -10,15 +10,16 @@ void engine_init() {
 }
 
 void engine_run(Game *game) {
+  clear();
+
   engine_init();
   game->init();
 
-  while (1) {
-    clear();
+  while (!game_over) {
     game->update();
     game->render();
     refresh();
-    napms(100);
+    napms(200);
   }
 
   game->cleanup();

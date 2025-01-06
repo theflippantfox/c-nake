@@ -10,6 +10,8 @@ typedef struct {
   void (*cleanup)();
 } Game;
 
+extern int game_over;
+
 void engine_run(Game *game);
 void engine_inti();
 void engine_cleanup();
