@@ -1,8 +1,8 @@
 #include "game.h"
 #include "../engine/engine.h"
 
-int window_width = 120;
-int window_height = 35;
+const int window_width = 70;
+const int window_height = 35;
 
 int game_over = 0;
 
@@ -46,7 +46,7 @@ void print_border() {
   attroff(COLOR_PAIR(1));
 }
 
-void food_render() { mvprintw(Food.y, Food.x, "x"); }
+void food_render() { mvprintw(Food.y, Food.x, "+"); }
 
 void check_collision() {
   if (Snake.head.x <= 0 || Snake.head.x >= window_width || Snake.head.y <= 0 ||
@@ -91,14 +91,36 @@ void handle_input(int ch) {
   }
 }
 
+void check_food_eaten() {
+  if (Snake.head.x == Food.x && Snake.head.y == Food.y) {
+    Snake.body[Snake.length].x = Food.x;
+    Snake.body[Snake.length].y = Food.y;
+
+    Snake.length++;
+
+    food_init();
+  }
+}
+
+void move_snake() {
+  Snake.body[0] = Snake.head;
+
+  for (int i = Snake.length - 1; i > 0; i--) {
+    Snake.body[i] = Snake.body[i - 1];
+  }
+
+  Snake.head.x += Direction.x;
+  Snake.head.y += Direction.y;
+}
+
 void update(int key) {
   if (key != ERR) {
     handle_input(key);
   }
 
-  Snake.head.x += Direction.x;
-  Snake.head.y += Direction.y;
+  move_snake();
 
+  check_food_eaten();
   check_collision();
 }
 
@@ -115,9 +137,9 @@ void render() {
   food_render();
 
   mvprintw(Snake.head.y, Snake.head.x, "O");
-  /* for (int i = 0; i < Snake.body.length; i++) { */
-  /*   mvprintw(Snake.body[i].y, Snake.body[i].x, "x"); */
-  /* } */
+  for (int i = 0; i < Snake.length; i++) {
+    mvprintw(Snake.body[i].y, Snake.body[i].x, "x");
+  }
 }
 
 void init() {
@@ -129,12 +151,14 @@ void init() {
   Snake.body[0].x = (window_width / 2) - 1;
   Snake.body[0].y = (window_height / 2);
 
+  Snake.length = 1;
+
   Direction.x = 1;
   Direction.y = 0;
 
   food_init();
 
-  init_colors();
+  /* init_colors(); */
   print_border();
 }
 

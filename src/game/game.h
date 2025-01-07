@@ -5,6 +5,9 @@
 #include <time.h>
 #include <unistd.h>
 
+extern const int window_width;
+extern const int window_height;
+
 struct _Cords {
   int x;
   int y;
@@ -12,16 +15,14 @@ struct _Cords {
 
 struct _Snake {
   _Cords head;
-  _Cords body[];
+  _Cords body[500];
+  int length;
 };
 
 struct _Direction {
   int x;
   int y;
 };
-
-extern int window_width;
-extern int window_height;
 
 void init();
 void update(int key);
