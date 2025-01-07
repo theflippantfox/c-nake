@@ -16,7 +16,9 @@ void engine_run(Game *game) {
   game->init();
 
   while (!game_over) {
-    game->update();
+    int ch = getch();
+
+    game->update(ch);
     game->render();
     refresh();
     napms(200);

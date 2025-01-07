@@ -5,7 +5,7 @@
 
 typedef struct {
   void (*init)();
-  void (*update)();
+  void (*update)(int key);
   void (*render)();
   void (*cleanup)();
 } Game;

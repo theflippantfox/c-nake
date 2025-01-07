@@ -24,7 +24,7 @@ extern int window_width;
 extern int window_height;
 
 void init();
-void update();
+void update(int key);
 void render();
 void cleanup();
 

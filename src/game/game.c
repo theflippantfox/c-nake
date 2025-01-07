@@ -55,7 +55,47 @@ void check_collision() {
   }
 }
 
-void update() {
+void handle_input(int ch) {
+  switch (ch) {
+  case KEY_UP:
+    if (Direction.y != 1) {
+      Direction.x = 0;
+      Direction.y = -1;
+    }
+    break;
+
+  case KEY_DOWN:
+    if (Direction.y != -1) {
+      Direction.x = 0;
+      Direction.y = 1;
+    }
+    break;
+
+  case KEY_LEFT:
+    if (Direction.x != 1) {
+      Direction.x = -1;
+      Direction.y = 0;
+    }
+    break;
+
+  case KEY_RIGHT:
+    if (Direction.x != -1) {
+      Direction.x = 1;
+      Direction.y = 0;
+    }
+    break;
+
+  case 'q':
+    game_over = 1;
+    break;
+  }
+}
+
+void update(int key) {
+  if (key != ERR) {
+    handle_input(key);
+  }
+
   Snake.head.x += Direction.x;
   Snake.head.y += Direction.y;
 
@@ -70,21 +110,6 @@ void clear_board() {
   }
 }
 
-void handle_input(int ch) {
-  switch (ch) {
-  case KEY_UP:
-    if (Direction.y != 1) {
-      Direction.x = 0;
-      Direction.y = -1;
-    }
-    break;
-
-  case 'q':
-    game_over = 1;
-    break;
-  }
-}
-
 void render() {
   clear_board();
   food_render();
@@ -96,7 +121,6 @@ void render() {
 }
 
 void init() {
-  init_colors();
   srand(time(NULL));
 
   Snake.head.x = window_width / 2;
@@ -110,6 +134,7 @@ void init() {
 
   food_init();
 
+  init_colors();
   print_border();
 }
 
