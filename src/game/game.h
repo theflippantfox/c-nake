@@ -23,9 +23,9 @@ struct _Direction {
 extern int window_width;
 extern int window_height;
 
-void snake_init();
-void snake_update();
-void snake_render();
-void snake_cleanup();
+void init();
+void update();
+void render();
+void cleanup();
 
 #endif // !GAME_H

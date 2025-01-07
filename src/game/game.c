@@ -55,7 +55,7 @@ void check_collision() {
   }
 }
 
-void snake_update() {
+void update() {
   Snake.head.x += Direction.x;
   Snake.head.y += Direction.y;
 
@@ -85,21 +85,25 @@ void handle_input(int ch) {
   }
 }
 
-void snake_render() {
+void render() {
   clear_board();
   food_render();
 
   mvprintw(Snake.head.y, Snake.head.x, "O");
-  for (int i = 0; i < Snake.body.length; i++) {
-    mvprintw(Snake.body[i].y, Snake.body[i].x, "x");
-  }
+  /* for (int i = 0; i < Snake.body.length; i++) { */
+  /*   mvprintw(Snake.body[i].y, Snake.body[i].x, "x"); */
+  /* } */
 }
 
-void snake_init() {
+void init() {
+  init_colors();
   srand(time(NULL));
 
   Snake.head.x = window_width / 2;
   Snake.head.y = window_height / 2;
+
+  Snake.body[0].x = (window_width / 2) - 1;
+  Snake.body[0].y = (window_height / 2);
 
   Direction.x = 1;
   Direction.y = 0;
@@ -109,6 +113,6 @@ void snake_init() {
   print_border();
 }
 
-void snake_cleanup() {
+void cleanup() {
   // TODO:
 }
