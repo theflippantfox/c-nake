@@ -1,8 +1,8 @@
 #include "game.h"
 #include "../engine/engine.h"
 
-const int window_width = 40;
-const int window_height = 20;
+int window_width = 40;
+int window_height = 20;
 
 int game_over = 0;
 
