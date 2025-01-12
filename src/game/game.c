@@ -1,8 +1,8 @@
 #include "game.h"
 #include "../engine/engine.h"
 
-const int window_width = 70;
-const int window_height = 35;
+const int window_width = 40;
+const int window_height = 20;
 
 int game_over = 0;
 
@@ -24,7 +24,6 @@ void food_init() {
 }
 
 void print_border() {
-  attron(COLOR_PAIR(1));
   for (int i = 0; i <= window_height; i++) {
     for (int j = 0; j <= window_width; j++) {
       if ((i == 0 || i == window_height) && (j == 0 || j == window_width)) {
@@ -43,10 +42,14 @@ void print_border() {
       }
     }
   }
-  attroff(COLOR_PAIR(1));
 }
 
-void food_render() { mvprintw(Food.y, Food.x, "+"); }
+void food_render() {
+  attron(COLOR_PAIR(1));
+  mvprintw(Food.y, Food.x, "@");
+
+  attroff(COLOR_PAIR(1));
+}
 
 void check_collision() {
   if (Snake.head.x <= 0 || Snake.head.x >= window_width || Snake.head.y <= 0 ||
@@ -136,7 +139,7 @@ void render() {
   clear_board();
   food_render();
 
-  mvprintw(Snake.head.y, Snake.head.x, "O");
+  mvprintw(Snake.head.y, Snake.head.x, "o");
   for (int i = 0; i < Snake.length; i++) {
     mvprintw(Snake.body[i].y, Snake.body[i].x, "x");
   }
@@ -158,7 +161,7 @@ void init() {
 
   food_init();
 
-  /* init_colors(); */
+  init_colors();
   print_border();
 }
 

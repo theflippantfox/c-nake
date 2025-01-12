@@ -5,8 +5,9 @@
 #include <time.h>
 #include <unistd.h>
 
-extern const int window_width;
-extern const int window_height;
+extern int window_width;
+extern int window_height;
+extern int game_over;
 
 struct _Cords {
   int x;
@@ -23,6 +24,16 @@ struct _Direction {
   int x;
   int y;
 };
+
+void init_colors();
+void food_init();
+void food_render();
+void print_border();
+void check_collision();
+void handle_input();
+void check_food_eaten();
+void move_snake();
+void clear_board();
 
 void init();
 void update(int key);
