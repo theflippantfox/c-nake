@@ -108,7 +108,7 @@ void check_food_eaten() {
 void move_snake() {
   Snake.body[0] = Snake.head;
 
-  for (int i = Snake.length - 1; i > 0; i--) {
+  for (int i = Snake.length; i > 0; i--) {
     Snake.body[i] = Snake.body[i - 1];
   }
 
